@@ -1,58 +1,47 @@
 #include "main.h"
 
 /**
- * wildcmp - compare two strings with "wildcard expansion" capabilities
- * @s1: string 1
- * @s2: string 2
- * Return: 1 if strings can be considered identical, else 0
+ * _strlen - return length of string
+ * @str: string to check
+ *
+ * Return: length of str
  */
-
-int wildcmp(char *s1, char *s2)
+int _strlen(char *str)
 {
-if (*s1 == '\0' && *s2 == '\0')
+if (*str == '\0')
+return (0);
+else
+return (1 + _strlen(str + 1));
+}
+
+/**
+ * check_palindrome - checks to see if a string is a palindrome
+ * @l: left hand index
+ * @r: right hand index
+ * @p: possible palindrome
+ *
+ * Return: 1 if palindrome 0 if not
+ */
+int check_palindrome(int l, int r, char *p)
+{
+if (l >= r)
 return (1);
-else if (*s1 == '\0' || *s2 == '\0')
-{
-if (*s1 == '\0' && *s2 == '*')
-return wildcmp(s1, ++s2);
-else if (*s1 == '*' && *s2 == '\0')
-return wildcmp(++s1, s2);
+else if (p[l] != p[r])
 return (0);
-}
-
-if (*s1 == *s2)
-{
-return wildcmp(++s1, ++s2);
-}
-else if (*s1 == '*')
-{
-if (*(s1 + 1) == '*')
-return wildcmp(++s1, s2);
 else
-{
-return wildcmp(s1, findsrc(s2, *(s1 + 1), 0, 0) + s2);
-}
-}
-else if (*s2 == '*')
-{
-if (*(s2 + 1) == '*')
-return wildcmp(s1, ++s2);
-else
-{
-return wildcmp(s1 + findsrc(s1, *(s2 + 1), 0, 0), s2);
-}
+return (check_palindrome(l + 1, r - 1, p));
 }
 
-return (0);
-
-}
-
-int findsrc(char *s, char c, int i, int p)
+/**
+ * is_palindrome - states if a string is a palindrome
+ * @s: string to check
+ *
+ * Return: 1 if palindrome, 0 if not
+ */
+int is_palindrome(char *s)
 {
-if (*(s + i) == '\0')
-return (p + 1);
-else if (*(s + i) == c || *(s + i) == '*')
-p = i;
+int i;
 
-return (findsrc(s, c, i + 1, p));
+i = _strlen(s) - 1;
+return (check_palindrome(0, i, s));
 }
