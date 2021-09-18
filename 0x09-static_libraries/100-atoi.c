@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _atoi-func to convert str to int
  * @s: pointer to be supplied

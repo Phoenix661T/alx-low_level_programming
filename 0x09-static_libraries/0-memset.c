@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _memset - check the code for Holberton School students.
  * @s: parameter for the array
