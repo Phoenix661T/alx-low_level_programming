@@ -1,39 +1,55 @@
 #include "main.h"
 #include <stdlib.h>
+
 /**
- * *string_nconcat - concatenates two strings
- * @s1: first string
- * @s2: second string
- * @n: limit of s2
- * Return: pointer to new space in memory or null
- **/
+ * string_nconcat -  concatenates two strings
+ * @s1: String one
+ * @s2: String two
+ * @n: number of bytes for s2
+ *
+ * Return: Pointer
+ */
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-char *strDup;
-int i;
-unsigned int j;
+char *c;
+unsigned int i, j, k, l;
 
 if (s1 == NULL)
+{
 s1 = "";
+}
 if (s2 == NULL)
+{
 s2 = "";
-i = 0;
-while (s1[i] != '\0')
-i++;
-strDup = malloc(sizeof(char) * (i + n + 1));
-if (strDup == NULL)
+}
+for (i = 0; s1[i]; i++)
+{}
+for (j = 0; s2[j]; j++)
+{}
+if (j > n)
+{
+j = n;
+}
+else
+{
+n = j;
+}
+k = i + j + 1;
+c = malloc(k * sizeof(char));
+if (c == NULL)
 return (NULL);
-i = j = 0;
-while (s1[i] != '\0')
+for (l = 0; l < k - 1; l++)
 {
-strDup[i] = s1[i];
-i++;
-}
-while (j < n && s2[j] != '\0')
+if (l < i)
 {
-strDup[i] = s2[j];
-i++, j++;
+c[l] = s1[l];
 }
-strDup[i] = '\0';
-return (strDup);
+else
+{
+c[l] = s2[l - i];
+}
+}
+c[k] = '\0';
+return (c);
 }
