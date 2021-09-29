@@ -1,38 +1,26 @@
-#include "f_pointrs.h"
-#include <stdio.h>
+#include "function_pointers.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
- * main - prints the opcodes of its own main function
- * @argc: line numbers of arguments
- * @argv: array strings
- * Return: 0
+ * main - check the code for Holberton School students.
+ * @argc: the number of args
+ * @argv: argument vector
  *
- * ./main number_of_bytes: 55
- * objdump -d -j.text -M intel main
+ * Return: Always 0.
  */
-
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-register int i, n;
-char *ptr = (char *)main;
+char *p = (char *)main;
+int b;
 
 if (argc != 2)
-{
 printf("Error\n"), exit(1);
-}
-n = atoi(argv[1]);
-
-if (n < 0)
-{
+b = atoi(argv[1]);
+if (b < 0)
 printf("Error\n"), exit(2);
-}
 
-for (i = 0; i < n - 1; i++)
-{
-printf("%02hhx ", ptr[i]);
-}
-
-printf("%02hhx\n", ptr[i]);
+while (b--)
+printf("%02hhx%s", *p++, b ? " " : "\n");
 return (0);
 }
