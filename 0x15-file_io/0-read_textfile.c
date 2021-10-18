@@ -13,7 +13,7 @@ int fd; /* file descriptor */
 ssize_t n_read, n_wrote;
 char *buffer;
 
-  if (filename == NULL)
+if (filename == NULL)
 return (0);
 
 /* open */
